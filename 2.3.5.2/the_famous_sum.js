@@ -66,40 +66,48 @@ super_digit(P) = super_digit(123123123)
 
 
 function sum_of_digits(s) {
-    var sum = 0   
+    var sum = 0
+    
     for(var i = 0;i < s.length;i++) {
         sum += parseInt(s[i])
-    }   
+    }
+    
     return sum + ""
 }
 
 function number_of_digits(s) {
-    var ct = 0  
-    var ma = {} 
+    var ct = 0
+    
+    var ma = {}
+    
     for(var i = 0;i < s.length;i++) {
         if (!(s[i] in ma)) {
             ct ++
             ma[s[i]] = 1
         }
     }
+    
     return ct
 }
 
 function super_digit(p) {
     if (number_of_digits(p) == 1) {
         return p[0]
-    } 
+    }
+    
     return super_digit(sum_of_digits(p))
 }
 
 function doit(input) {
     var [n, ks] = input.split(' ')
+    
     var k = parseInt(ks)
-    var p = ""
-    for(var i = 0;i < k;i++) {
-        p = p + n
+    
+    if (number_of_digits(n) == 1) {
+        console.log(n[0])
+    } else {
+        console.log(super_digit((sum_of_digits(n) * k) + ""))
     }
-    console.log(super_digit(p))
 }
 
 process.stdin.resume();
